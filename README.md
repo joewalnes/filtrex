@@ -37,10 +37,6 @@ Get it
 10 second tutorial
 ------------------
 
-You need two files:
-*
-*   filtrex.js
-
 ````javascript
 // Input from user (e.g. search filter)
 var expression = 'transactions <= 5 and abs(profit) > 20.5';
@@ -155,3 +151,7 @@ Because it was originally built for FILTeR EXpressions.
 **Unit tests?**
 
 Here: [Source](https://github.com/joewalnes/filtex/raw/master/tests/filtrex-tests.html), [Results](https://rawgit.com/joewalnes/filtrex/master/tests/filtrex-tests.html)
+
+**What happens if the expression is malformed?**
+
+Calling `compileExpression()` with a malformed expression will throw an exception. You can catch that and display feedback to the user. A good UI pattern is to attempt to compile on each keystroke and continuously indicate whether the expression is valid.
