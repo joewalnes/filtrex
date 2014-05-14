@@ -1,0 +1,130 @@
+<script src="../filtrex.js"></script>
+<script src="tinytest.js"></script>
+<script>
+
+tests({
+
+    'simple numeric expressions': function() {
+        eq(7, compileExpression('1 + 2 * 3')());
+        eq(7, compileExpression('2 * 3 + 1')());
+        eq(7, compileExpression('1 + (2 * 3)')());
+        eq(9, compileExpression('(1 + 2) * 3')());
+        eq(-19, compileExpression('((1 + 2) * 3 / 2 + 1 - 4 + (2 ^ 3)) * -2')());
+        eq(1.54, compileExpression('1.4 * 1.1')());
+        eq(7, compileExpression('97 % 10')());
+    },
+
+    'bind to data': function() {
+        var something = compileExpression('1 + foo * bar');
+        eq(11, something({foo:5, bar:2})); 
+        eq(3, something({foo:2, bar:1})); 
+    },
+
+    'math functions': function() {
+        eq(5, compileExpression('abs(-5)')());
+        eq(5, compileExpression('abs(5)')());
+        eq(5, compileExpression('ceil(4.1)')());
+        eq(5, compileExpression('ceil(4.6)')());
+        eq(4, compileExpression('floor(4.1)')());
+        eq(4, compileExpression('floor(4.6)')());
+        eq(4, compileExpression('round(4.1)')());
+        eq(5, compileExpression('round(4.6)')());
+        eq(3, compileExpression('sqrt(9)')());
+    },
+
+    'functions with multiple args': function() {
+        eq(2, compileExpression('min(2)')());
+        eq(2, compileExpression('max(2)')());
+        eq(2, compileExpression('min(2, 5)')());
+        eq(5, compileExpression('max(2, 5)')());
+        eq(2, compileExpression('min(2, 5, 6)')());
+        eq(6, compileExpression('max(2, 5, 6)')());
+        eq(1, compileExpression('min(2, 5, 6, 1)')());
+        eq(6, compileExpression('max(2, 5, 6, 1)')());
+        eq(1, compileExpression('min(2, 5, 6, 1, 9)')());
+        eq(9, compileExpression('max(2, 5, 6, 1, 9)')());
+        eq(1, compileExpression('min(2, 5, 6, 1, 9, 12)')());
+        eq(12, compileExpression('max(2, 5, 6, 1, 9, 12)')());
+    },
+
+    'boolean logic': function() {
+        eq(0, compileExpression('0 and 0')());
+        eq(0, compileExpression('0 and 1')());
+        eq(0, compileExpression('1 and 0')());
+        eq(1, compileExpression('1 and 1')());
+        eq(0, compileExpression('0 or 0')());
+        eq(1, compileExpression('0 or 1')());
+        eq(1, compileExpression('1 or 0')());
+        eq(1, compileExpression('1 or 1')());
+        eq(1, compileExpression('not 0')());
+        eq(0, compileExpression('not 1')());
+        eq(1, compileExpression('(0 and 1) or 1')());
+        eq(0, compileExpression('0 and (1 or 1)')());
+        eq(1, compileExpression('0 and 1 or 1')()); // or is higher precedence
+        eq(1, compileExpression('1 or 1 and 0')()); // or is higher precedence
+        eq(0, compileExpression('not 1 and 0')()); // not is higher precedence
+    },
+
+    'comparisons': function() {
+        eq(1, compileExpression('foo == 4')({foo:4}));
+        eq(0, compileExpression('foo == 4')({foo:3}));
+        eq(0, compileExpression('foo == 4')({foo:-4}));
+        eq(0, compileExpression('foo != 4')({foo:4}));
+        eq(1, compileExpression('foo != 4')({foo:3}));
+        eq(1, compileExpression('foo != 4')({foo:-4}));
+        eq(0, compileExpression('foo > 4')({foo:3}));
+        eq(0, compileExpression('foo > 4')({foo:4}));
+        eq(1, compileExpression('foo > 4')({foo:5}));
+        eq(0, compileExpression('foo >= 4')({foo:3}));
+        eq(1, compileExpression('foo >= 4')({foo:4}));
+        eq(1, compileExpression('foo >= 4')({foo:5}));
+        eq(1, compileExpression('foo < 4')({foo:3}));
+        eq(0, compileExpression('foo < 4')({foo:4}));
+        eq(0, compileExpression('foo < 4')({foo:5}));
+        eq(1, compileExpression('foo <= 4')({foo:3}));
+        eq(1, compileExpression('foo <= 4')({foo:4}));
+        eq(0, compileExpression('foo <= 4')({foo:5}));
+    },
+
+    'in / not in': function() {
+        eq(0, compileExpression('5 in (1, 2, 3, 4)')());
+        eq(1, compileExpression('3 in (1, 2, 3, 4)')());
+        eq(1, compileExpression('5 not in (1, 2, 3, 4)')());
+        eq(0, compileExpression('3 not in (1, 2, 3, 4)')());
+    },
+
+    'string test': function() {
+        eq(1, compileExpression('foo == "hello"')({foo:'hello'}));
+        eq(0, compileExpression('foo == "hello"')({foo:'bye'}));
+        eq(0, compileExpression('foo != "hello"')({foo:'hello'}));
+        eq(1, compileExpression('foo != "hello"')({foo:'bye'}));
+        eq(1, compileExpression('foo in ("aa", "bb")')({foo:'aa'}));
+        eq(0, compileExpression('foo in ("aa", "bb")')({foo:'c'}));
+        eq(0, compileExpression('foo not in ("aa", "bb")')({foo:'aa'}));
+        eq(1, compileExpression('foo not in ("aa", "bb")')({foo:'cc'}));
+    },
+
+    'a ? b : c': function() {
+        eq(4, compileExpression('1 > 2 ? 3 : 4')());
+        eq(3, compileExpression('1 < 2 ? 3 : 4')());
+    },
+
+    'kitchensink': function() {
+        var kitchenSink = compileExpression('4 > lowNumber * 2 and (max(a, b) < 20 or foo) ? 1.1 : 9.4');
+        eq(1.1, kitchenSink({lowNumber:1.5, a:10, b:12, foo:false}));
+        eq(9.4, kitchenSink({lowNumber:3.5, a:10, b:12, foo:false}));
+    },
+
+    'symbols with dots': function() {
+        eq(123, compileExpression('hello.world.foo')({'hello.world.foo': 123}));
+        eq(123, compileExpression('order.gooandstuff')({'order.gooandstuff': 123}));
+    },
+
+    'custom functions': function() {
+        function triple(x) { return x * 3; };
+        eq(21, compileExpression('triple(v)', {triple:triple})({v:7}));
+    },
+
+});
+
+</script>
