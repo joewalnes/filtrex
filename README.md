@@ -147,7 +147,7 @@ Because it was originally built for FILTeR EXpressions.
 
 **Unit tests?**
 
-Here: [Source](https://github.com/joewalnes/filtrex/raw/master/tests/filtrex-tests.html), [Results](https://rawgit.com/joewalnes/filtrex/master/tests/filtrex-tests.html)
+Here: [Source](https://github.com/joewalnes/filtrex/blob/master/test/filtrex-test.html), [Results](https://rawgit.com/joewalnes/filtrex/master/test/filtrex-test.html)
 
 **What happens if the expression is malformed?**
 
