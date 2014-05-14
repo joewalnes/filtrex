@@ -1,4 +1,113 @@
-filtrex
+Filtrex
 =======
 
-A simple, safe, JavaScript Filter Expression compiler
+A simple, safe, JavaScript expression engine, allowing end-users to enter arbitrary expressions without p0wning you.
+
+Why?
+----
+
+There are many cases where you want a user to be able enter an arbitrary expression through a user interface. e.g.
+
+*   Filter/searching across items using multiple fields
+*   Colorize items based on values
+*   Plot a chart
+
+Sure, you could do that with JavaScript and `eval()`, but I'm sure I don't have to tell you have stupid that would be.
+
+Filtrex defines a really simple expression language that should be familiar to anyone who's ever used a spreadsheet and compile it into a JavaScript function at runtime.
+
+Features
+--------
+
+*   **Simple!** End user expression language looks like this `transactions <= 5 and abs(profit) > 20.5`
+*   **Fast!** Expressions get compiled into JavaScript functions, offering the same performance as if it had been hand coded. e.g. `function(item) { return item.transactions <=5 && Math.abs(item.profit) > 20.5; }`
+*   **Safe!** You as the developer have control of which data can be accessed and the functions that can be called. Expressions cannot escape the sandbox.
+*   **Pluggable!** Add your own data and functions.
+*   **Predictable!** Because users can't define loops or recursive functions, you know you won't be left hanging.
+
+
+10 second tutorial
+------------------
+
+````javascript
+// Input from user (e.g. search filter)
+var expression = 'transactions <= 5 and abs(profit) > 20.5';
+
+// Compile expression to executable function
+var filter = compileExpression(expression);
+
+// Execute function
+filter({transactions: 3, profit:-40.5}); // true
+filter({transactions: 3, profit:-14.5}); // false
+````
+
+Under the hood, the above expression gets compiled to a clean and fast JavaScript function, looking something like this:
+
+```javascript
+// Resulting function
+function(item) {
+  return item.transactions <= 5 && Math.abs(profit) > 20.5;
+}
+````
+
+Expressions
+-----------
+
+There are only 2 types: numbers and strings. Numbers may be floating point or integers. Boolean logic is applied on the truthy value of values (e.g. any non-zero number is true, any non-empty string is true, otherwise false).
+
+Values | Description
+--- | ---
+43, -1.234 | Numbers
+"hello" | String
+foo, a.b.c | External data variable defined by application (may be numbers or strings)
+
+Numeric arithmetic | Description
+--- | ---
+x + y | Add
+x - y | Subtract
+x * y | Multiply
+x / y | Divide
+x % y | Modulo
+x ^ y | Power
+
+Comparisons | Description
+--- | ---
+x == y | Equals
+x < y | Less than
+x <= y | Less than or equal to
+x > y | Greater than
+x >= y | Greater than or equal to
+x in (a, b, c) | Equivalent to (x == a or x == b or x == c)
+x not in (a, b, c) | Equivalent to (x != a and x != b and x != c)
+
+Boolean logic | Description
+--- | ---
+x or y | Boolean or
+x and y | Boolean and
+not x | Boolean not
+x ? y : z | If boolean x, value y, else z
+( x ) | Explicity operator precedence
+
+Built-in functions | Description
+--- | ---
+abs(x) | Absolute value
+ceil(x) | Round floating point up
+floor(x) | Round floating point down
+log(x) | Natural logarithm
+random() | Random floating point from 0.0 to 1.0
+round(x) | Round floating point
+sqrt(x) | Square root
+
+Operator precedence follows that of any sane language.
+
+Adding custom functions
+-----------------------
+
+TODO
+
+FAQ
+---
+
+**Why the name?**
+
+Because it was originally built for FILTeR EXpressions.
