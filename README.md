@@ -32,7 +32,7 @@ Features
 Get it
 ------
 
-*    [filtrex.js](https://rawgit.com/joewalnes/filtrex/master/filtrex.js)
+*    **DOWNLOAD [filtrex.js](https://rawgit.com/joewalnes/filtrex/master/filtrex.js)**
 
 10 second tutorial
 ------------------
@@ -121,9 +121,6 @@ function strlen(s) {
   return s.length;
 }
 
-// User input
-var expression = ;
-
 // Compile expression to executable function
 var myfilter = compileExpression(
                     'strlen(firstname) > 5',
@@ -146,11 +143,11 @@ Because it was originally built for FILTeR EXpressions.
 
 **License?**
 
-[MIT](https://github.com/joewalnes/filtex/raw/master/LICENSE)
+[MIT](https://github.com/joewalnes/filtrex/raw/master/LICENSE)
 
 **Unit tests?**
 
-Here: [Source](https://github.com/joewalnes/filtex/raw/master/tests/filtrex-tests.html), [Results](https://rawgit.com/joewalnes/filtrex/master/tests/filtrex-tests.html)
+Here: [Source](https://github.com/joewalnes/filtrex/blob/master/test/filtrex-test.html), [Results](https://rawgit.com/joewalnes/filtrex/master/test/filtrex-test.html)
 
 **What happens if the expression is malformed?**
 
