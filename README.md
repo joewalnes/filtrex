@@ -55,7 +55,7 @@ Under the hood, the above expression gets compiled to a clean and fast JavaScrip
 ```javascript
 // Resulting function
 function(item) {
-  return item.transactions <= 5 && Math.abs(profit) > 20.5;
+  return item.transactions <= 5 && Math.abs(item.profit) > 20.5;
 }
 ````
 
