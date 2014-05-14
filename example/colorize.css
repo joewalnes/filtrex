@@ -1,0 +1,18 @@
+body {
+  font-family: sans-serif, arial;
+}
+.expression {
+  font-size: 20px;
+  width: 500px;
+}
+.data {
+  margin-top: 40px;
+  border-collapse: collapse;
+}
+.data td {
+  border: 1px solid #ccc;
+  width: 100px;
+}
+.data th {
+  text-align: left;
+}

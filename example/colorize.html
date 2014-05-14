@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Filtrex colorizing example</title>
+    <link rel="stylesheet" href="colorize.css">
+  </head>
+  <body>
+
+    <h1>Filtrex colorizing example</h1>
+
+    <input type="text" class="expression"
+           value="((taste - 50) / 70)"><br>
+    <small>Create an expression that returns a value from -1 (orange) to +1 (cyan)</small>
+
+    <table class="data">
+      <thead>
+        <tr>
+          <th>price</th>
+          <th>weight</th>
+          <th>taste</th>
+          <th>expression&nbsp;result</th>
+        </tr>
+      </thead>
+      <tbody>
+      </tbody>
+    </table>
+
+    <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script src="../filtrex.js"></script>
+    <script src="colorize.js"></script>
+
+  </body>
+</html>

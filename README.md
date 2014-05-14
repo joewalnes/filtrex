@@ -13,7 +13,7 @@ Why?
 There are many cases where you want a user to be able enter an arbitrary expression through a user interface. e.g.
 
 *   Filter/searching across items using multiple fields ([example](http://rawgit.com/joewalnes/filtrex/master/example/highlight.html))
-*   Colorize items based on values
+*   Colorize items based on values ([example](http://rawgit.com/joewalnes/filtrex/master/example/colorize.html))
 *   Plot a chart
 
 Sure, you could do that with JavaScript and `eval()`, but I'm sure I don't have to tell you have stupid that would be.
