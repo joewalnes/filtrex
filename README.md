@@ -4,7 +4,7 @@ Filtrex
 A simple, safe, JavaScript expression engine, allowing end-users to enter arbitrary expressions without p0wning you.
 
 ````python
-category == 'meal' and (calories * weight > 2000.0 or type in ("cake", "pie"))
+category == "meal" and (calories * weight > 2000.0 or subcategory in ("cake", "pie"))
 ````
 
 Why?
