@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Filtrex highlighting example</title>
+    <link rel="stylesheet" href="highlight.css">
+  </head>
+  <body>
+
+    <h1>Filtrex highlighting example</h1>
+
+    <input type="text" class="expression"
+           value="price / taste &gt; 1.3 or weight &gt; 80"><br>
+    <small>Change the expression to highlight different rows</small>
+
+    <table class="data">
+      <thead>
+        <tr>
+          <th>price</th>
+          <th>weight</th>
+          <th>taste</th>
+        </tr>
+      </thead>
+      <tbody>
+      </tbody>
+    </table>
+
+    <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script src="../filtrex.js"></script>
+    <script src="highlight.js"></script>
+
+  </body>
+</html>

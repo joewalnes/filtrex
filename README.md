@@ -12,7 +12,7 @@ Why?
 
 There are many cases where you want a user to be able enter an arbitrary expression through a user interface. e.g.
 
-*   Filter/searching across items using multiple fields
+*   Filter/searching across items using multiple fields ([example](https://rawgit.com/joewalnes/filtrex/master/example/highlight.html))
 *   Colorize items based on values
 *   Plot a chart
 
