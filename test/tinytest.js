@@ -53,7 +53,7 @@ var TinyTest = {
             }
         }
         setTimeout(function() { // Give document a chance to complete
-            if (window.document && document.body) {
+            if (typeof window !== 'undefined' && window.document && document.body) {
                 document.body.style.backgroundColor = (failures == 0 ? '#99ff99' : '#ff9999');
             }
         }, 0);
@@ -83,9 +83,10 @@ var TinyTest = {
 
 };
 
-var fail               = TinyTest.fail.bind(TinyTest),
-    assert             = TinyTest.assert.bind(TinyTest),
-    assertEquals       = TinyTest.assertEquals.bind(TinyTest),
-    eq                 = TinyTest.assertEquals.bind(TinyTest), // alias for assertEquals
-    assertStrictEquals = TinyTest.assertStrictEquals.bind(TinyTest),
-    tests              = TinyTest.run.bind(TinyTest);
+
+exports.fail               = TinyTest.fail.bind(TinyTest),
+exports.assert             = TinyTest.assert.bind(TinyTest),
+exports.assertEquals       = TinyTest.assertEquals.bind(TinyTest),
+exports.eq                 = TinyTest.assertEquals.bind(TinyTest), // alias for assertEquals
+exports.assertStrictEquals = TinyTest.assertStrictEquals.bind(TinyTest),
+exports.tests              = TinyTest.run.bind(TinyTest);
