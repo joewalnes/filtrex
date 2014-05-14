@@ -29,9 +29,17 @@ Features
 *   **Pluggable!** Add your own data and functions.
 *   **Predictable!** Because users can't define loops or recursive functions, you know you won't be left hanging.
 
+Get it
+------
+
+*    [filtrex.js](https://rawgit.com/joewalnes/filtrex/master/filtrex.js)
 
 10 second tutorial
 ------------------
+
+You need two files:
+*
+*   filtrex.js
 
 ````javascript
 // Input from user (e.g. search filter)
@@ -135,3 +143,15 @@ FAQ
 **Why the name?**
 
 Because it was originally built for FILTeR EXpressions.
+
+**What's Jison?**
+
+[Jison](http://zaach.github.io/jison/) is bundled with Filtrex - it's a JavaScript parser generator that does the underlying hard work of understanding the expression. It's based on Flex and Bison.
+
+**License?**
+
+[MIT](https://github.com/joewalnes/filtex/raw/master/LICENSE)
+
+**Unit tests?**
+
+Here: [Source](https://github.com/joewalnes/filtex/raw/master/tests/filtrex-tests.html), [Results](https://rawgit.com/joewalnes/filtrex/master/tests/filtrex-tests.html)
