@@ -153,3 +153,14 @@ Here: [Source](https://github.com/joewalnes/filtrex/blob/master/test/filtrex-tes
 **What happens if the expression is malformed?**
 
 Calling `compileExpression()` with a malformed expression will throw an exception. You can catch that and display feedback to the user. A good UI pattern is to attempt to compile on each keystroke and continuously indicate whether the expression is valid.
+
+Like this? Want other thingies?
+-------------------------------
+
+*   [websocketd](https://github.com/joewalnes/websocketd) - Turn any program that uses STDIN/STDOUT into a WebSocket server. Like inetd, but for WebSockets.
+*   [ReconnectingWebSocket](https://github.com/joewalnes/reconnecting-websocket) - Simplest way to add some robustness to your WebSocket connections.
+*   [Smoothie Charts](http://smoothiecharts.org/) - JavaScript charts for streaming data.
+*   Visit [The Igloo Lab](http://theigloolab.com/) to see and subscribe to other thingies I make.
+
+And **[follow @joewalnes](https://twitter.com/joewalnes)**!
+
