@@ -17,7 +17,7 @@ There are many cases where you want a user to be able enter an arbitrary express
 *   Colorize items based on values ([example](http://rawgit.com/joewalnes/filtrex/master/example/colorize.html))
 *   Implement a browser based spreadsheet
 
-Sure, you could do that with JavaScript and `eval()`, but I'm sure I don't have to tell you have stupid that would be.
+Sure, you could do that with JavaScript and `eval()`, but I'm sure I don't have to tell you how stupid that would be.
 
 Filtrex defines a really simple expression language that should be familiar to anyone who's ever used a spreadsheet and compile it into a JavaScript function at runtime.
 
