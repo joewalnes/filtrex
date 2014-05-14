@@ -1,0 +1,11 @@
+body {
+  font-family: sans-serif, arial;
+}
+.expression {
+  font-size: 20px;
+  width: 500px;
+}
+.plot {
+  width: 500px;
+  height: 300px;
+}
