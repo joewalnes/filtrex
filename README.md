@@ -34,11 +34,11 @@ Features
 var expression = 'transactions <= 5 and abs(profit) > 20.5';
 
 // Compile expression to executable function
-var filter = compileExpression(expression);
+var myfilter = compileExpression(expression);
 
 // Execute function
-filter({transactions: 3, profit:-40.5}); // true
-filter({transactions: 3, profit:-14.5}); // false
+myfilter({transactions: 3, profit:-40.5}); // returns 1
+myfilter({transactions: 3, profit:-14.5}); // returns 0
 ````
 
 Under the hood, the above expression gets compiled to a clean and fast JavaScript function, looking something like this:
@@ -94,6 +94,8 @@ abs(x) | Absolute value
 ceil(x) | Round floating point up
 floor(x) | Round floating point down
 log(x) | Natural logarithm
+max(a, b, c...) | Max value (variable length of args)
+min(a, b, c...) | Min value (variable length of args)
 random() | Random floating point from 0.0 to 1.0
 round(x) | Round floating point
 sqrt(x) | Square root
@@ -103,7 +105,25 @@ Operator precedence follows that of any sane language.
 Adding custom functions
 -----------------------
 
-TODO
+When integrating in to your application, you can add your own custom functions.
+
+````javascript
+// Custom function: Return string length.
+function strlen(s) {
+  return s.length;
+}
+
+// User input
+var expression = ;
+
+// Compile expression to executable function
+var myfilter = compileExpression(
+                    'strlen(firstname) > 5',
+                    {strlen:strlen}); // custom functions
+
+myfilter({firstname:'Joe'});    // returns 0
+myfilter({firstname:'Joseph'}); // returns 1
+````
 
 FAQ
 ---
