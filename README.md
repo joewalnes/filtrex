@@ -121,9 +121,6 @@ function strlen(s) {
   return s.length;
 }
 
-// User input
-var expression = ;
-
 // Compile expression to executable function
 var myfilter = compileExpression(
                     'strlen(firstname) > 5',
