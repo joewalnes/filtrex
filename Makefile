@@ -17,7 +17,7 @@ src/parser.js: src/grammar.json
 	$(BIN)/jison -j -o $@ $<
 
 filtrex.js: src/filtrex.js src/parser.js
-	$(BIN)/browserify -s filtrex index.js > $@
+	$(BIN)/browserify -s compileExpression index.js > $@
 
 filtrex.min.js: filtrex.js
 	$(BIN)/uglifyjs < $< > $@
