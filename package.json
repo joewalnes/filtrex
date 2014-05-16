@@ -1,0 +1,12 @@
+{
+  "name": "filtrex",
+  "main": "index.js",
+  "scripts": {
+    "test": "node test/filtrex-test.js"
+  },
+  "devDependencies": {
+    "browserify": "~4.1.2",
+    "uglify-js": "~2.4.13",
+    "jison": "~0.4.13"
+  }
+}

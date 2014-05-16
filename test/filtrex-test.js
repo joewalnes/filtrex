@@ -1,8 +1,8 @@
-<script src="../filtrex.js"></script>
-<script src="tinytest.js"></script>
-<script>
+var compileExpression = require('../');
+var tt = require('./tinytest');
+var eq = tt.eq;
 
-tests({
+tt.tests({
 
     'simple numeric expressions': function() {
         eq(7, compileExpression('1 + 2 * 3')());
@@ -126,5 +126,3 @@ tests({
     },
 
 });
-
-</script>
