@@ -46,9 +46,12 @@ function compileExpression(expression, extraFunctions /* optional */) {
     tree.forEach(toJs);
     js.push(';');
 
-    var func = new Function('functions', 'data', js.join(''));
+    function unknown(funcName) {
+        throw 'Unknown function: ' + funcName + '()';
+    }
+    var func = new Function('functions', 'data', 'unknown', js.join(''));
     return function(data) {
-        return func(functions, data);
+        return func(functions, data, unknown);
     };
 }
 
@@ -151,7 +154,7 @@ function filtrexParser() {
                 ['NUMBER' , code([1])],
                 ['STRING' , code(['"', 1, '"'])],
                 ['SYMBOL' , code(['data["', 1, '"]'])],
-                ['SYMBOL ( argsList )', code(['functions.', 1, '(', 3, ')'])],
+                ['SYMBOL ( argsList )', code(['(functions.hasOwnProperty("', 1, '") ? functions.', 1, '(', 3, ') : unknown("', 1, '"))'])],
                 ['e in ( inSet )', code([1, ' in (function(o) { ', 4, 'return o; })({})'])],
                 ['e not in ( inSet )', code(['!(', 1, ' in (function(o) { ', 5, 'return o; })({}))'])],
             ],

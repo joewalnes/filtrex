@@ -125,6 +125,18 @@ tests({
         eq(21, compileExpression('triple(v)', {triple:triple})({v:7}));
     },
 
+    'cannot call prototype methods on function table': function() {
+        // Credit to @emilvirkki for finding this
+        window.p0wned = false;
+        var evil = compileExpression(
+            'constructor.constructor.name.replace("",constructor.constructor("window.p0wned=true"))');
+        try {
+            evil();
+            fail('Exception should have been thrown');
+        } catch(expected) {}
+        eq(false, window.p0wned);
+    },
+
 });
 
 </script>
