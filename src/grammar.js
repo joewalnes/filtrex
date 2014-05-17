@@ -88,7 +88,7 @@ var grammar = {
             ['NUMBER' , code([1])],
             ['STRING' , code(['"', 1, '"'])],
             ['SYMBOL' , code(['data["', 1, '"]'])],
-            ['SYMBOL ( argsList )', code(['functions.', 1, '(', 3, ')'])],
+            ['SYMBOL ( argsList )', code(['(functions.hasOwnProperty("', 1, '") ? functions.', 1, '(', 3, ') : unknown("', 1, '"))'])],
             ['e in ( inSet )', code([1, ' in (function(o) { ', 4, 'return o; })({})'])],
             ['e not in ( inSet )', code(['!(', 1, ' in (function(o) { ', 5, 'return o; })({}))'])],
         ],

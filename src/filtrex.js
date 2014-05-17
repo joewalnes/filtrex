@@ -44,8 +44,11 @@ module.exports = function compileExpression(expression, extraFunctions /* option
     tree.forEach(toJs);
     js.push(';');
 
-    var func = new Function('functions', 'data', js.join(''));
-    return function(data) {
-        return func(functions, data);
+    function unknown(funcName) {
+        throw 'Unknown function: ' + funcName + '()';
+    }
+    var func = new Function('functions', 'data', 'unknown', js.join(''));
+     return function(data) {
+        return func(functions, data, unknown);
     };
 }
