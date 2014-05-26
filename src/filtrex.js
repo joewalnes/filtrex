@@ -168,6 +168,11 @@ function filtrexParser() {
     return new Jison.Parser(grammar);
 }
 
+if (typeof exports !== 'undefined') {
+    exports.compile = compileExpression;
+    exports.parser = filtrexParser;
+}
+
 // ---------------------------------------------------
 // Jison will be appended after this point by Makefile
 // ---------------------------------------------------
