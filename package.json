@@ -1,0 +1,12 @@
+{
+  "name": "filterx",
+  "author": "Joe Walnes",
+  "description": "A simple, safe, JavaScript expression engine, allowing end-users to enter arbitrary expressions without p0wning you.",
+  "repository": {
+    "type":"git",
+    "url":"http://github.com/joewalnes/filtrex"
+  },
+  "directories": { "src": "./src", "test": "./test"},
+  "main": "./fltrex.js"
+}
+
