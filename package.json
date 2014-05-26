@@ -1,5 +1,6 @@
 {
   "name": "filterx",
+  "version": "0.1.0",
   "author": "Joe Walnes",
   "description": "A simple, safe, JavaScript expression engine, allowing end-users to enter arbitrary expressions without p0wning you.",
   "repository": {
