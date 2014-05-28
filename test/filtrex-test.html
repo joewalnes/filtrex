@@ -1,4 +1,5 @@
-<script src="../filtrex.js"></script>
+<script src="../src/jison.js"></script>
+<script src="../src/filtrex.js"></script>
 <script src="tinytest.js"></script>
 <script>
 
@@ -118,6 +119,7 @@ tests({
     'symbols with dots': function() {
         eq(123, compileExpression('hello.world.foo')({'hello.world.foo': 123}));
         eq(123, compileExpression('order.gooandstuff')({'order.gooandstuff': 123}));
+        eq(123, compileExpression('hello.world.foo')({'hello':{'world':{'foo':123}}}));
     },
 
     'custom functions': function() {
