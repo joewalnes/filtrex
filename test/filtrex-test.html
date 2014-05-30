@@ -119,7 +119,15 @@ tests({
     'symbols with dots': function() {
         eq(123, compileExpression('hello.world.foo')({'hello.world.foo': 123}));
         eq(123, compileExpression('order.gooandstuff')({'order.gooandstuff': 123}));
-        eq(123, compileExpression('hello.world.foo')({'hello':{'world':{'foo':123}}}));
+        eq(123, compileExpression('hello.world.foo')({'hello':{'world':{'foo':123}}}, true));
+    },
+
+    'of arrays': function() {
+        eq(3, compileExpression('max(item of array)', {
+            max: function(o){ return Math.max.apply(null, o);}
+        })({'array':[
+            {'item': 1},{'item': 2},{'item': 3}
+        ]}));
     },
 
     'custom functions': function() {
