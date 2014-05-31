@@ -122,12 +122,30 @@ tests({
         eq(123, compileExpression('hello.world.foo')({'hello':{'world':{'foo':123}}}, true));
     },
 
-    'of arrays': function() {
+    'arrays': function() {
+        eq(3, compileExpression('count(a)', {
+            'count': function(o) { return o.length; }
+        })({
+            'a':[1,2,3]
+        }));
+        eq(3, compileExpression('count(a)', {
+            'count': function(o) { return o.length; }
+        })({
+            'a':[1,2,3]
+        }, true));
+    },
+
+    'of': function() {
         eq(3, compileExpression('max(item of array)', {
             max: function(o){ return Math.max.apply(null, o);}
         })({'array':[
             {'item': 1},{'item': 2},{'item': 3}
         ]}));
+        eq(3, compileExpression('max(foo.bar of array)', {
+            max: function(o){ return Math.max.apply(null, o);}
+        })({'array':[
+            {'foo': {'bar' : 1}},{'foo': {'bar' : 2}},{'foo': {'bar' : 3}},
+        ]}, true));
     },
 
     'custom functions': function() {

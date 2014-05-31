@@ -54,11 +54,15 @@ function compileExpression(expression, extraFunctions /* optional */) {
           continue;
         
         if ((typeof object[prop]) == 'object' && object[prop] !== null) {
-          var child = flatten(object[prop]);
-          for (var child_prop in child) {
-            if (!child.hasOwnProperty(child_prop))
-              continue;
-            result[prop + '.' + child_prop] = child[child_prop];
+          if (Array.isArray(object[prop])) {
+            result[prop] = object[prop].map(flatten);
+          } else {
+            var child = flatten(object[prop]);
+            for (var child_prop in child) {
+              if (!child.hasOwnProperty(child_prop))
+                continue;
+              result[prop + '.' + child_prop] = child[child_prop];
+            }
           }
         } else {
           result[prop] = object[prop];
@@ -67,9 +71,16 @@ function compileExpression(expression, extraFunctions /* optional */) {
       return result;
     };
 
-    var func = new Function('functions', 'data', js.join(''));
-    return function(data) {
-        return func(functions, flatten(data));
+    function unknown(funcName) {
+        throw 'Unknown function: ' + funcName + '()';
+    }
+    var func = new Function('functions', 'data', 'unknown', js.join(''));
+    return function(data, flat) {
+        if (flat) {
+            return func(functions, flatten(data), unknown);
+        } else {
+            return func(functions, data, unknown);
+        }
     };
 }
 
@@ -117,6 +128,7 @@ function filtrexParser() {
                 ['or[^\\w]' , 'return "or";'],
                 ['not[^\\w]', 'return "not";'],
                 ['in[^\\w]', 'return "in";'],
+                ['of[^\\w]', 'return "of";'],
 
                 ['\\s+',  ''], // skip whitespace
                 ['[0-9]+(?:\\.[0-9]+)?\\b', 'return "NUMBER";'], // 212.321
@@ -137,6 +149,7 @@ function filtrexParser() {
             ['left', 'or'],
             ['left', 'and'],
             ['left', 'in'],
+            ['left', 'of'],
             ['left', '==', '!='],
             ['left', '<', '<=', '>', '>='],
             ['left', '+', '-'],
@@ -172,8 +185,9 @@ function filtrexParser() {
                 ['NUMBER' , code([1])],
                 ['STRING' , code(['"', 1, '"'])],
                 ['SYMBOL' , code(['data["', 1, '"]'])],
-                ['SYMBOL ( argsList )', code(['functions.', 1, '(', 3, ')'])],
+                ['SYMBOL ( argsList )', code(['(functions.hasOwnProperty("', 1, '") ? functions.', 1, '(', 3, ') : unknown("', 1, '"))'])],
                 ['e in ( inSet )', code([1, ' in (function(o) { ', 4, 'return o; })({})'])],
+                ['SYMBOL of e', code([3, '.map(function(i){ return i["', 1, '"]})'])],
                 ['e not in ( inSet )', code(['!(', 1, ' in (function(o) { ', 5, 'return o; })({}))'])],
             ],
             argsList: [

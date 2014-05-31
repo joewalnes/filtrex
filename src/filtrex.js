@@ -54,11 +54,15 @@ function compileExpression(expression, extraFunctions /* optional */) {
           continue;
         
         if ((typeof object[prop]) == 'object' && object[prop] !== null) {
-          var child = flatten(object[prop]);
-          for (var child_prop in child) {
-            if (!child.hasOwnProperty(child_prop))
-              continue;
-            result[prop + '.' + child_prop] = child[child_prop];
+          if (Array.isArray(object[prop])) {
+            result[prop] = object[prop].map(flatten);
+          } else {
+            var child = flatten(object[prop]);
+            for (var child_prop in child) {
+              if (!child.hasOwnProperty(child_prop))
+                continue;
+              result[prop + '.' + child_prop] = child[child_prop];
+            }
           }
         } else {
           result[prop] = object[prop];
