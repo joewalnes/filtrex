@@ -12,7 +12,10 @@
     "parsing",
     "parser"
   ],
-  "author": "Joe Walnes",
+  "author": {
+    "name": "Joe Walnes",
+    "url": "https://github.com/joewalnes"
+  },
   "repository": {
     "type": "git",
     "url": "http://github.com/joewalnes/filtrex"
