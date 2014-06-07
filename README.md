@@ -30,10 +30,14 @@ Features
 *   **Pluggable!** Add your own data and functions.
 *   **Predictable!** Because users can't define loops or recursive functions, you know you won't be left hanging.
 
-Get it
-------
+Installation
+------------
 
-*    **DOWNLOAD [filtrex.js](https://rawgit.com/joewalnes/filtrex/master/filtrex.js)**
+    npm install filtrex
+
+or
+
+    bower install filtrex
 
 10 second tutorial
 ------------------
