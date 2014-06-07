@@ -1,6 +1,6 @@
 {
   "name": "filtrex",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "description": "A simple, safe, JavaScript expression engine, allowing end-users to enter arbitrary expressions without p0wning you.",
   "main": "index.js",
   "scripts": {
@@ -14,8 +14,8 @@
   ],
   "author": "Joe Walnes",
   "repository": {
-    "type":"git",
-    "url":"http://github.com/joewalnes/filtrex"
+    "type": "git",
+    "url": "http://github.com/joewalnes/filtrex"
   },
   "license": "MIT",
   "devDependencies": {
