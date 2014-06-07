@@ -1,6 +1,6 @@
 {
   "name": "filtrex",
-  "version": "0.0.0",
+  "version": "0.5.0",
   "main": "index.js",
   "scripts": {
     "test": "node test/filtrex-test.js"
