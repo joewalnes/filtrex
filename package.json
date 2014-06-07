@@ -1,6 +1,6 @@
 {
   "name": "filtrex",
-  "version": "0.5.1",
+  "version": "0.5.2",
   "description": "A simple, safe, JavaScript expression engine, allowing end-users to enter arbitrary expressions without p0wning you.",
   "main": "index.js",
   "scripts": {
