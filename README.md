@@ -1,7 +1,8 @@
 Filtrex
 =======
 
-[![GitTip](http://img.shields.io/gittip/alexgorbatchev.svg)](https://wwwstatus](https://david-dm.org/alexgorbatchev/.svg)](https://david-dm.org/alexgorbatchev/filtrex)svg)](https://david-dm.org/alexgorbatchev/filtrex)
+[![GitTip](http://img.shields.io/gittip/alexgorbatchev.svg)](https://www.gittip.com/alexgorbatchev/)
+[![Dependency Status](https://david-dm.org/alexgorbatchev/filtrex.svg)](https://david-dm.org/alexgorbatchev/filtrex)
 [![devDependency Status](https://david-dm.org/alexgorbatchev/filtrex/dev-status.svg)](https://david-dm.org/alexgorbatchev/filtrex#info=devDependencies)
 [![Build Status](https://secure.travis-ci.org/alexgorbatchev/filtrex.svg?branch=master)](https://travis-ci.org/alexgorbatchev/filtrex)
 
