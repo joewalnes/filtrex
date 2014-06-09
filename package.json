@@ -4,8 +4,7 @@
   "description": "A simple, safe, JavaScript expression engine, allowing end-users to enter arbitrary expressions without p0wning you.",
   "main": "filtrex.js",
   "scripts": {
-    "pretest": "make",
-    "test": "mocha test/*-test.js"
+    "test": "mocha test/*-test.js && karma start --single-run --browsers PhantomJS"
   },
   "keywords": [
     "expression",
@@ -26,7 +25,14 @@
     "browserify": "~4.1.2",
     "chai": "^1.9.1",
     "jison": "~0.4.13",
+    "karma": "^0.12.16",
+    "karma-bro": "^0.4.0",
+    "karma-chrome-launcher": "^0.1.4",
+    "karma-cli": "0.0.4",
+    "karma-mocha": "^0.1.3",
+    "karma-phantomjs-launcher": "^0.1.4",
     "mocha": "^1.20.1",
-    "uglify-js": "~2.4.13"
+    "uglify-js": "~2.4.13",
+    "watchify": "^0.10.2"
   }
 }

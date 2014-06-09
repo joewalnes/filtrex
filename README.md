@@ -1,11 +1,23 @@
 Filtrex
 =======
 
+[![GitTip](http://img.shields.io/gittip/alexgorbatchev.svg)](https://wwwstatus](https://david-dm.org/alexgorbatchev/.svg)](https://david-dm.org/alexgorbatchev/filtrex)svg)](https://david-dm.org/alexgorbatchev/filtrex)
+[![devDependency Status](https://david-dm.org/alexgorbatchev/filtrex/dev-status.svg)](https://david-dm.org/alexgorbatchev/filtrex#info=devDependencies)
+[![Build Status](https://secure.travis-ci.org/alexgorbatchev/filtrex.svg?branch=master)](https://travis-ci.org/alexgorbatchev/filtrex)
+
+[![NPM](https://nodei.co/npm/filtrex.svg)](https://npmjs.org/package/filtrex)
+
 A simple, safe, JavaScript expression engine, allowing end-users to enter arbitrary expressions without p0wning you.
 
 ````python
 category == "meal" and (calories * weight > 2000.0 or subcategory in ("cake", "pie"))
 ````
+
+Installation
+------------
+
+    npm install filtrex
+    bower install filtrex
 
 Why?
 ----
@@ -24,20 +36,11 @@ Filtrex defines a really simple expression language that should be familiar to a
 Features
 --------
 
-*   **Simple!** End user expression language looks like this `transactions <= 5 and abs(profit) > 20.5`
-*   **Fast!** Expressions get compiled into JavaScript functions, offering the same performance as if it had been hand coded. e.g. `function(item) { return item.transactions <=5 && Math.abs(item.profit) > 20.5; }`
-*   **Safe!** You as the developer have control of which data can be accessed and the functions that can be called. Expressions cannot escape the sandbox.
-*   **Pluggable!** Add your own data and functions.
-*   **Predictable!** Because users can't define loops or recursive functions, you know you won't be left hanging.
-
-Installation
-------------
-
-    npm install filtrex
-
-or
-
-    bower install filtrex
+* **Simple!** End user expression language looks like this `transactions <= 5 and abs(profit) > 20.5`
+* **Fast!** Expressions get compiled into JavaScript functions, offering the same performance as if it had been hand coded. e.g. `function(item) { return item.transactions <=5 && Math.abs(item.profit) > 20.5; }`
+* **Safe!** You as the developer have control of which data can be accessed and the functions that can be called. Expressions cannot escape the sandbox.
+* **Pluggable!** Add your own data and functions.
+* **Predictable!** Because users can't define loops or recursive functions, you know you won't be left hanging.
 
 10 second tutorial
 ------------------
