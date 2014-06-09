@@ -5,7 +5,7 @@
   "main": "filtrex.js",
   "scripts": {
     "pretest": "make",
-    "test": "node test/filtrex-test.js"
+    "test": "mocha test/*-test.js"
   },
   "keywords": [
     "expression",
@@ -24,7 +24,9 @@
   "license": "MIT",
   "devDependencies": {
     "browserify": "~4.1.2",
-    "uglify-js": "~2.4.13",
-    "jison": "~0.4.13"
+    "chai": "^1.9.1",
+    "jison": "~0.4.13",
+    "mocha": "^1.20.1",
+    "uglify-js": "~2.4.13"
   }
 }
