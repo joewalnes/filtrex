@@ -2,7 +2,7 @@ BIN := ./node_modules/.bin
 
 .PHONY: all clean preflight
 
-all: filtrex.js filtrex.min.js
+all: filtrex.js filtrex.min.js clean-generated
 
 preflight:
 	@( test -d node_modules/browserify \
@@ -10,11 +10,13 @@ preflight:
 			&& test -d node_modules/uglify-js ) \
 		|| ( echo "Required modules missing. Please run 'npm install'."; exit 1 )
 
-clean:
-	rm -f filtrex.js
-	rm -f filtrex.min.js
+clean-generated:
 	rm -f src/grammar.json
 	rm -f src/parser.js
+
+clean: clean-generated
+	rm -f filtrex.js
+	rm -f filtrex.min.js
 
 src/grammar.json: src/grammar.js
 	node $< > $@
