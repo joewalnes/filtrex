@@ -5,7 +5,7 @@ if(typeof window === 'undefined')
     return;
 
 describe('filtrex-client-only', function() {
-    it('cannot call prototype methods on function table', function() {
+    it('does not allow to call prototype methods on function table', function() {
         // Credit to @emilvirkki for finding this
         window.p0wned = false;
         var evil = compileExpression(
