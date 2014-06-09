@@ -2,7 +2,7 @@
   "name": "filtrex",
   "version": "0.5.3",
   "description": "A simple, safe, JavaScript expression engine, allowing end-users to enter arbitrary expressions without p0wning you.",
-  "main": "index.js",
+  "main": "filtrex.js",
   "scripts": {
     "test": "node test/filtrex-test.js"
   },

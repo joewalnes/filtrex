@@ -1,6 +1,6 @@
 {
   "name": "filtrex",
-  "main": "index.js",
+  "main": "filtrex.js",
   "version": "0.5.3",
   "homepage": "http://github.com/joewalnes/filtrex",
   "description": "A simple, safe, JavaScript expression engine, allowing end-users to enter arbitrary expressions without p0wning you.",
