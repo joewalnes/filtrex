@@ -17,7 +17,10 @@ Installation
 ------------
 
     npm install filtrex
+    ... or
     bower install filtrex
+    ... or
+    curl -O https://raw.githubusercontent.com/joewalnes/filtrex/master/filtrex.js
 
 Why?
 ----
