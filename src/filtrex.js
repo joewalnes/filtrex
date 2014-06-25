@@ -92,6 +92,9 @@ function filtrexParser() {
                 ['>', 'return ">";'],
                 ['\\?', 'return "?";'],
                 ['\\:', 'return ":";'],
+                ['\\.', 'return ".";'],
+                ['\\[', 'return "[";'],
+                ['\\]', 'return "]";'],
                 ['and[^\\w]', 'return "and";'],
                 ['or[^\\w]' , 'return "or";'],
                 ['not[^\\w]', 'return "not";'],
@@ -99,7 +102,7 @@ function filtrexParser() {
 
                 ['\\s+',  ''], // skip whitespace
                 ['[0-9]+(?:\\.[0-9]+)?\\b', 'return "NUMBER";'], // 212.321
-                ['[a-zA-Z][\\.a-zA-Z0-9_]*', 'return "SYMBOL";'], // some.Symbol22
+                ['[a-zA-Z][a-zA-Z0-9_]*', 'return "SYMBOL";'], // someSymbol22
                 ['"(?:[^"])*"', 'yytext = yytext.substr(1, yyleng-2); return "STRING";'], // "foo"
 
                 // End
@@ -123,6 +126,7 @@ function filtrexParser() {
             ['left', '^'],
             ['left', 'not'],
             ['left', 'UMINUS'],
+            ['left', '.']
         ],
         // Grammar
         bnf: {
@@ -154,6 +158,8 @@ function filtrexParser() {
                 ['SYMBOL ( argsList )', code(['functions.', 1, '(', 3, ')'])],
                 ['e in ( inSet )', code([1, ' in (function(o) { ', 4, 'return o; })({})'])],
                 ['e not in ( inSet )', code(['!(', 1, ' in (function(o) { ', 5, 'return o; })({}))'])],
+                ['e . SYMBOL', code([1, '.', 3])],
+                ['e [ e ]', code([1, '[', 3, ']'])]
             ],
             argsList: [
                 ['e', code([1], true)],
