@@ -46,12 +46,9 @@ function compileExpression(expression, extraFunctions /* optional */) {
     tree.forEach(toJs);
     js.push(';');
 
-    function unknown(funcName) {
-        throw 'Unknown function: ' + funcName + '()';
-    }
-    var func = new Function('functions', 'data', 'unknown', js.join(''));
+    var func = new Function('functions', 'data', js.join(''));
     return function(data) {
-        return func(functions, data, unknown);
+        return func(functions, data);
     };
 }
 
@@ -95,6 +92,9 @@ function filtrexParser() {
                 ['>', 'return ">";'],
                 ['\\?', 'return "?";'],
                 ['\\:', 'return ":";'],
+                ['\\.', 'return ".";'],
+                ['\\[', 'return "[";'],
+                ['\\]', 'return "]";'],
                 ['and[^\\w]', 'return "and";'],
                 ['or[^\\w]' , 'return "or";'],
                 ['not[^\\w]', 'return "not";'],
@@ -102,7 +102,7 @@ function filtrexParser() {
 
                 ['\\s+',  ''], // skip whitespace
                 ['[0-9]+(?:\\.[0-9]+)?\\b', 'return "NUMBER";'], // 212.321
-                ['[a-zA-Z][\\.a-zA-Z0-9_]*', 'return "SYMBOL";'], // some.Symbol22
+                ['[a-zA-Z][a-zA-Z0-9_]*', 'return "SYMBOL";'], // someSymbol22
                 ['"(?:[^"])*"', 'yytext = yytext.substr(1, yyleng-2); return "STRING";'], // "foo"
 
                 // End
@@ -126,6 +126,7 @@ function filtrexParser() {
             ['left', '^'],
             ['left', 'not'],
             ['left', 'UMINUS'],
+            ['left', '.']
         ],
         // Grammar
         bnf: {
@@ -154,9 +155,11 @@ function filtrexParser() {
                 ['NUMBER' , code([1])],
                 ['STRING' , code(['"', 1, '"'])],
                 ['SYMBOL' , code(['data["', 1, '"]'])],
-                ['SYMBOL ( argsList )', code(['(functions.hasOwnProperty("', 1, '") ? functions.', 1, '(', 3, ') : unknown("', 1, '"))'])],
+                ['SYMBOL ( argsList )', code(['functions.', 1, '(', 3, ')'])],
                 ['e in ( inSet )', code([1, ' in (function(o) { ', 4, 'return o; })({})'])],
                 ['e not in ( inSet )', code(['!(', 1, ' in (function(o) { ', 5, 'return o; })({}))'])],
+                ['e . SYMBOL', code([1, '.', 3])],
+                ['e [ e ]', code([1, '[', 3, ']'])]
             ],
             argsList: [
                 ['e', code([1], true)],
