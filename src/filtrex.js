@@ -46,9 +46,12 @@ function compileExpression(expression, extraFunctions /* optional */) {
     tree.forEach(toJs);
     js.push(';');
 
-    var func = new Function('functions', 'data', js.join(''));
+    function unknown(funcName) {
+        throw 'Unknown function: ' + funcName + '()';
+    }
+    var func = new Function('functions', 'data', 'unknown', js.join(''));
     return function(data) {
-        return func(functions, data);
+        return func(functions, data, unknown);
     };
 }
 
@@ -86,6 +89,7 @@ function filtrexParser() {
                 ['\\,', 'return ",";'],
                 ['==', 'return "==";'],
                 ['\\!=', 'return "!=";'],
+                ['\\~=', 'return "~=";'],
                 ['>=', 'return ">=";'],
                 ['<=', 'return "<=";'],
                 ['<', 'return "<";'],
@@ -100,6 +104,7 @@ function filtrexParser() {
                 ['\\s+',  ''], // skip whitespace
                 ['[0-9]+(?:\\.[0-9]+)?\\b', 'return "NUMBER";'], // 212.321
                 ['[a-zA-Z][\\.a-zA-Z0-9_]*', 'return "SYMBOL";'], // some.Symbol22
+                ['\'(?:[^\'])*\'', 'yytext = yytext.substr(1, yyleng-2); return "SYMBOL";'], // 'some-symbol'
                 ['"(?:[^"])*"', 'yytext = yytext.substr(1, yyleng-2); return "STRING";'], // "foo"
 
                 // End
@@ -116,7 +121,7 @@ function filtrexParser() {
             ['left', 'or'],
             ['left', 'and'],
             ['left', 'in'],
-            ['left', '==', '!='],
+            ['left', '==', '!=', '~='],
             ['left', '<', '<=', '>', '>='],
             ['left', '+', '-'],
             ['left', '*', '/', '%'],
@@ -142,6 +147,7 @@ function filtrexParser() {
                 ['not e'  , code(['Number(!', 2, ')'])],
                 ['e == e' , code(['Number(', 1, '==', 3, ')'])],
                 ['e != e' , code(['Number(', 1, '!=', 3, ')'])],
+                ['e ~= e' , code(['RegExp(', 3, ').test(', 1, ')'])],
                 ['e < e'  , code(['Number(', 1, '<' , 3, ')'])],
                 ['e <= e' , code(['Number(', 1, '<=', 3, ')'])],
                 ['e > e'  , code(['Number(', 1, '> ', 3, ')'])],
@@ -151,7 +157,7 @@ function filtrexParser() {
                 ['NUMBER' , code([1])],
                 ['STRING' , code(['"', 1, '"'])],
                 ['SYMBOL' , code(['data["', 1, '"]'])],
-                ['SYMBOL ( argsList )', code(['functions.', 1, '(', 3, ')'])],
+                ['SYMBOL ( argsList )', code(['(functions.hasOwnProperty("', 1, '") ? functions.', 1, '(', 3, ') : unknown("', 1, '"))'])],
                 ['e in ( inSet )', code([1, ' in (function(o) { ', 4, 'return o; })({})'])],
                 ['e not in ( inSet )', code(['!(', 1, ' in (function(o) { ', 5, 'return o; })({}))'])],
             ],

@@ -89,6 +89,7 @@ function filtrexParser() {
                 ['\\,', 'return ",";'],
                 ['==', 'return "==";'],
                 ['\\!=', 'return "!=";'],
+                ['\\~=', 'return "~=";'],
                 ['>=', 'return ">=";'],
                 ['<=', 'return "<=";'],
                 ['<', 'return "<";'],
@@ -103,6 +104,7 @@ function filtrexParser() {
                 ['\\s+',  ''], // skip whitespace
                 ['[0-9]+(?:\\.[0-9]+)?\\b', 'return "NUMBER";'], // 212.321
                 ['[a-zA-Z][\\.a-zA-Z0-9_]*', 'return "SYMBOL";'], // some.Symbol22
+                ['\'(?:[^\'])*\'', 'yytext = yytext.substr(1, yyleng-2); return "SYMBOL";'], // 'some-symbol'
                 ['"(?:[^"])*"', 'yytext = yytext.substr(1, yyleng-2); return "STRING";'], // "foo"
 
                 // End
@@ -119,7 +121,7 @@ function filtrexParser() {
             ['left', 'or'],
             ['left', 'and'],
             ['left', 'in'],
-            ['left', '==', '!='],
+            ['left', '==', '!=', '~='],
             ['left', '<', '<=', '>', '>='],
             ['left', '+', '-'],
             ['left', '*', '/', '%'],
@@ -145,6 +147,7 @@ function filtrexParser() {
                 ['not e'  , code(['Number(!', 2, ')'])],
                 ['e == e' , code(['Number(', 1, '==', 3, ')'])],
                 ['e != e' , code(['Number(', 1, '!=', 3, ')'])],
+                ['e ~= e' , code(['RegExp(', 3, ').test(', 1, ')'])],
                 ['e < e'  , code(['Number(', 1, '<' , 3, ')'])],
                 ['e <= e' , code(['Number(', 1, '<=', 3, ')'])],
                 ['e > e'  , code(['Number(', 1, '> ', 3, ')'])],
