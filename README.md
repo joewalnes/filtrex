@@ -86,6 +86,7 @@ x < y | Less than
 x <= y | Less than or equal to
 x > y | Greater than
 x >= y | Greater than or equal to
+x ~= y | Regular expression match
 x in (a, b, c) | Equivalent to (x == a or x == b or x == c)
 x not in (a, b, c) | Equivalent to (x != a and x != b and x != c)
 

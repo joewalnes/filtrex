@@ -104,6 +104,11 @@ tests({
         eq(1, compileExpression('foo not in ("aa", "bb")')({foo:'cc'}));
     },
 
+    'regexp test': function() {
+        eq(1, compileExpression('foo ~= "^[hH]ello"')({foo:'hello'}));
+        eq(0, compileExpression('foo ~= "^[hH]ello"')({foo:'bye'}));
+    },
+
     'a ? b : c': function() {
         eq(4, compileExpression('1 > 2 ? 3 : 4')());
         eq(3, compileExpression('1 < 2 ? 3 : 4')());
