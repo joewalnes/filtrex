@@ -68,7 +68,7 @@ Values | Description
 --- | ---
 43, -1.234 | Numbers
 "hello" | String
-foo, a.b.c | External data variable defined by application (may be numbers or strings)
+foo, a.b.c, 'foo-bar' | External data variable defined by application (may be numbers or strings)
 
 Numeric arithmetic | Description
 --- | ---

@@ -120,6 +120,11 @@ tests({
         eq(123, compileExpression('order.gooandstuff')({'order.gooandstuff': 123}));
     },
 
+    'quoted symbols': function() {
+        eq(123, compileExpression('\'hello-world-foo\'')({'hello-world-foo': 123}));
+        eq(123, compileExpression('\'order+goo*and#stuff\'')({'order+goo*and#stuff': 123}));
+    },
+
     'custom functions': function() {
         function triple(x) { return x * 3; };
         eq(21, compileExpression('triple(v)', {triple:triple})({v:7}));
