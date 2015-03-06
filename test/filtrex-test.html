@@ -33,6 +33,7 @@ tests({
     },
 
     'functions with multiple args': function() {
+        eq(1, compileExpression('random() >= 0')());
         eq(2, compileExpression('min(2)')());
         eq(2, compileExpression('max(2)')());
         eq(2, compileExpression('min(2, 5)')());
