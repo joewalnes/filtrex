@@ -159,16 +159,16 @@ function filtrexParser() {
                 ['SYMBOL' , code(['data["', 1, '"]'])],
                 ['SYMBOL ( )', code(['(functions.hasOwnProperty("', 1, '") ? functions.', 1, '() : unknown("', 1, '"))'])],
                 ['SYMBOL ( argsList )', code(['(functions.hasOwnProperty("', 1, '") ? functions.', 1, '(', 3, ') : unknown("', 1, '"))'])],
-                ['e in ( inSet )', code([1, ' in (function(o) { ', 4, 'return o; })({})'])],
-                ['e not in ( inSet )', code(['!(', 1, ' in (function(o) { ', 5, 'return o; })({}))'])],
+                ['e in ( inSet )', code(['(function(o) { return ', 4, '; })(', 1, ')'])],
+                ['e not in ( inSet )', code(['!(function(o) { return ', 5, '; })(', 1, ')'])],
             ],
             argsList: [
                 ['e', code([1], true)],
                 ['argsList , e', code([1, ',', 3], true)],
             ],
             inSet: [
-                ['e', code(['o[', 1, '] = true; '], true)],
-                ['inSet , e', code([1, 'o[', 3, '] = true; '], true)],
+                ['e', code(['o ==', 1], true)],
+                ['inSet , e', code([1, '|| o ==', 3], true)],
             ],
         }
     };
