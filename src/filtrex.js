@@ -54,8 +54,6 @@ function compileExpression(expression, extraFunctions /* optional */) {
         return Object.prototype.hasOwnProperty.call(obj||{}, name) ? obj[name] : undefined;
     }
 
-    console.log(js.join(''));
-
     var func = new Function('functions', 'data', 'unknown', 'prop', js.join(''));
 
     return function(data) {
