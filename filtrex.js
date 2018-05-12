@@ -182,7 +182,6 @@ function filtrexParser() {
                 ['NUMBER' , code([1])],
                 ['STRING' , code([1])],
                 ['SYMBOL' , code(['prop(data, ', 1, ')'])],
-                ['SYMBOL of e', code(['prop(', 3, ',', 1, ')'])],
                 ['SYMBOL ( )', code(['(functions.hasOwnProperty(', 1, ') ? functions[', 1, ']() : unknown(', 1, '))'])],
                 ['SYMBOL ( argsList )', code(['(functions.hasOwnProperty(', 1, ') ? functions[', 1, '](', 3, ') : unknown(', 1, '))'])],
                 ['e in ( inSet )', code(['(function(o) { return ', 4, '; })(', 1, ')'])],
