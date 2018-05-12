@@ -176,7 +176,6 @@ function filtrexParser() {
                 ['e >= e' , code(['Number(', 1, '>=', 3, ')'])],
                 ['e ? e : e', code([1, '?', 3, ':', 5])],
                 ['( e )'  , code([2])],
-                ['( array , e )', code(['[', 2, ',', 4, ']'])],
                 ['NUMBER' , code([1])],
                 ['STRING' , code([1])],
                 ['SYMBOL' , code(['prop(data, ', 1, ')'])],
