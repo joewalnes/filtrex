@@ -159,10 +159,10 @@ Calling `compileExpression()` with a malformed expression will throw an exceptio
 Contributors
 ------------
 
-* [@joewalnes](https://github.com/joewalnes) – Joe Walnes – the author of this repository
-* [@msantos](https://github.com/msantos) – Michael Santos – quoted symbols, regex matches and numerous fixes
-* [@alexgorbatchev](https://github.com/alexgorbatchev) – Alex Gorbatchev – NPM package and housekeeping
-* [@m93a](https://github.com/m93a) – Michal Grňo – critical fixes of security bug
+* [@joewalnes](https://github.com/joewalnes) Joe Walnes – the author of this repository
+* [@msantos](https://github.com/msantos) Michael Santos – quoted symbols, regex matches and numerous fixes
+* [@alexgorbatchev](https://github.com/alexgorbatchev) Alex Gorbatchev – NPM package and housekeeping
+* [@m93a](https://github.com/m93a) Michal Grňo – critical fixes of security bug
 
 
 Like this? Want other thingies?
