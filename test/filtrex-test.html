@@ -154,6 +154,28 @@ tests({
         eq(false, window.p0wned);
     },
 
+    'cannot access properties of the data prototype': function() {
+        eq(undefined, compileExpression('a')(Object.create({a: 42})));
+    },
+
+    'cannot inject single-quoted names with double quotes': function() {
+        window.p0wned = false;
+        let evil = compileExpression(`'"+(window.p0wned = true)+"'`);
+
+        eq(31, evil({'"+(window.p0wned = true)+"': 31}));
+        eq(false, window.p0wned);
+
+        eq(42, compileExpression(
+            "'undefined:(window.p0wned=true)));((true?(x=>x)'()",
+            {'undefined:(window.p0wned=true)));((true?(x=>x)': ()=>42}
+        )());
+        eq(false, window.p0wned);
+    },
+
+    'backslash escaping': function() {
+        eq('\\good', compileExpression(`"\\" + '\\'`)({'\\':'good'}));
+    },
+
 });
 
 </script>
