@@ -49,9 +49,15 @@ function compileExpression(expression, extraFunctions /* optional */) {
     function unknown(funcName) {
         throw 'Unknown function: ' + funcName + '()';
     }
-    var func = new Function('functions', 'data', 'unknown', js.join(''));
+
+    function prop(obj, name) {
+        return Object.prototype.hasOwnProperty.call(obj||{}, name) ? obj[name] : undefined;
+    }
+
+    var func = new Function('functions', 'data', 'unknown', 'prop', js.join(''));
+
     return function(data) {
-        return func(functions, data, unknown);
+        return func(functions, data, unknown, prop);
     };
 }
 
@@ -103,9 +109,25 @@ function filtrexParser() {
 
                 ['\\s+',  ''], // skip whitespace
                 ['[0-9]+(?:\\.[0-9]+)?\\b', 'return "NUMBER";'], // 212.321
-                ['[a-zA-Z][\\.a-zA-Z0-9_]*', 'return "SYMBOL";'], // some.Symbol22
-                ['\'(?:[^\'])*\'', 'yytext = yytext.substr(1, yyleng-2); return "SYMBOL";'], // 'some-symbol'
-                ['"(?:[^"])*"', 'yytext = yytext.substr(1, yyleng-2); return "STRING";'], // "foo"
+
+                ['[a-zA-Z][\\.a-zA-Z0-9_]*',
+                 `yytext = JSON.stringify(yytext);
+                  return "SYMBOL";`
+                ], // some.Symbol22
+
+                [`'(?:[^\'])*'`,
+                 `yytext = JSON.stringify(
+                     yytext.substr(1, yyleng-2)
+                  );
+                  return "SYMBOL";`
+                ], // 'some-symbol'
+
+                ['"(?:[^"])*"',
+                 `yytext = JSON.stringify(
+                     yytext.substr(1, yyleng-2)
+                  );
+                  return "STRING";`
+                ], // "foo"
 
                 // End
                 ['$', 'return "EOF";'],
@@ -155,20 +177,20 @@ function filtrexParser() {
                 ['e ? e : e', code([1, '?', 3, ':', 5])],
                 ['( e )'  , code([2])],
                 ['NUMBER' , code([1])],
-                ['STRING' , code(['"', 1, '"'])],
-                ['SYMBOL' , code(['data["', 1, '"]'])],
-                ['SYMBOL ( )', code(['(functions.hasOwnProperty("', 1, '") ? functions.', 1, '() : unknown("', 1, '"))'])],
-                ['SYMBOL ( argsList )', code(['(functions.hasOwnProperty("', 1, '") ? functions.', 1, '(', 3, ') : unknown("', 1, '"))'])],
-                ['e in ( inSet )', code([1, ' in (function(o) { ', 4, 'return o; })({})'])],
-                ['e not in ( inSet )', code(['!(', 1, ' in (function(o) { ', 5, 'return o; })({}))'])],
+                ['STRING' , code([1])],
+                ['SYMBOL' , code(['prop(data, ', 1, ')'])],
+                ['SYMBOL ( )', code(['(functions.hasOwnProperty(', 1, ') ? functions[', 1, ']() : unknown(', 1, '))'])],
+                ['SYMBOL ( argsList )', code(['(functions.hasOwnProperty(', 1, ') ? functions[', 1, '](', 3, ') : unknown(', 1, '))'])],
+                ['e in ( inSet )', code(['(function(o) { return ', 4, '; })(', 1, ')'])],
+                ['e not in ( inSet )', code(['!(function(o) { return ', 5, '; })(', 1, ')'])],
             ],
             argsList: [
                 ['e', code([1], true)],
                 ['argsList , e', code([1, ',', 3], true)],
             ],
             inSet: [
-                ['e', code(['o[', 1, '] = true; '], true)],
-                ['inSet , e', code([1, 'o[', 3, '] = true; '], true)],
+                ['e', code(['o ==', 1], true)],
+                ['inSet , e', code([1, '|| o ==', 3], true)],
             ],
         }
     };

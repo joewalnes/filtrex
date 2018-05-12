@@ -94,6 +94,12 @@ tests({
         eq(0, compileExpression('3 not in (1, 2, 3, 4)')());
     },
 
+    'in() is not vulnerable to Object.prototype extensions ': function() {
+        Object.prototype.aa = true;
+        eq(0, compileExpression('"aa" in ("bb", "cc")')());
+        delete Object.prototype.aa;
+    },
+
     'string test': function() {
         eq(1, compileExpression('foo == "hello"')({foo:'hello'}));
         eq(0, compileExpression('foo == "hello"')({foo:'bye'}));

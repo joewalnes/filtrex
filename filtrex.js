@@ -54,8 +54,6 @@ function compileExpression(expression, extraFunctions /* optional */) {
         return Object.prototype.hasOwnProperty.call(obj||{}, name) ? obj[name] : undefined;
     }
 
-    console.log(js.join(''));
-
     var func = new Function('functions', 'data', 'unknown', 'prop', js.join(''));
 
     return function(data) {
@@ -178,23 +176,21 @@ function filtrexParser() {
                 ['e >= e' , code(['Number(', 1, '>=', 3, ')'])],
                 ['e ? e : e', code([1, '?', 3, ':', 5])],
                 ['( e )'  , code([2])],
-                ['( array , e )', code(['[', 2, ',', 4, ']'])],
                 ['NUMBER' , code([1])],
                 ['STRING' , code([1])],
                 ['SYMBOL' , code(['prop(data, ', 1, ')'])],
-                ['SYMBOL of e', code(['prop(', 3, ',', 1, ')'])],
                 ['SYMBOL ( )', code(['(functions.hasOwnProperty(', 1, ') ? functions[', 1, ']() : unknown(', 1, '))'])],
                 ['SYMBOL ( argsList )', code(['(functions.hasOwnProperty(', 1, ') ? functions[', 1, '](', 3, ') : unknown(', 1, '))'])],
-                ['e in ( inSet )', code([1, ' in (function(o) { ', 4, 'return o; })({})'])],
-                ['e not in ( inSet )', code(['!(', 1, ' in (function(o) { ', 5, 'return o; })({}))'])],
+                ['e in ( inSet )', code(['(function(o) { return ', 4, '; })(', 1, ')'])],
+                ['e not in ( inSet )', code(['!(function(o) { return ', 5, '; })(', 1, ')'])],
             ],
             argsList: [
                 ['e', code([1], true)],
                 ['argsList , e', code([1, ',', 3], true)],
             ],
             inSet: [
-                ['e', code(['o[', 1, '] = true; '], true)],
-                ['inSet , e', code([1, 'o[', 3, '] = true; '], true)],
+                ['e', code(['o ==', 1], true)],
+                ['inSet , e', code([1, '|| o ==', 3], true)],
             ],
         }
     };

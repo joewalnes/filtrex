@@ -3,9 +3,9 @@ Filtrex
 
 A simple, safe, JavaScript expression engine, allowing end-users to enter arbitrary expressions without p0wning you.
 
-````python
+```python
 category == "meal" and (calories * weight > 2000.0 or subcategory in ("cake", "pie"))
-````
+```
 
 Why?
 ----
@@ -38,7 +38,7 @@ Get it
 10 second tutorial
 ------------------
 
-````javascript
+```javascript
 // Input from user (e.g. search filter)
 var expression = 'transactions <= 5 and abs(profit) > 20.5';
 
@@ -48,7 +48,7 @@ var myfilter = compileExpression(expression);
 // Execute function
 myfilter({transactions: 3, profit:-40.5}); // returns 1
 myfilter({transactions: 3, profit:-14.5}); // returns 0
-````
+```
 
 Under the hood, the above expression gets compiled to a clean and fast JavaScript function, looking something like this:
 
@@ -57,7 +57,7 @@ Under the hood, the above expression gets compiled to a clean and fast JavaScrip
 function(item) {
   return item.transactions <= 5 && Math.abs(item.profit) > 20.5;
 }
-````
+```
 
 Expressions
 -----------
@@ -117,7 +117,7 @@ Adding custom functions
 
 When integrating in to your application, you can add your own custom functions.
 
-````javascript
+```javascript
 // Custom function: Return string length.
 function strlen(s) {
   return s.length;
@@ -130,7 +130,7 @@ var myfilter = compileExpression(
 
 myfilter({firstname:'Joe'});    // returns 0
 myfilter({firstname:'Joseph'}); // returns 1
-````
+```
 
 FAQ
 ---
@@ -141,7 +141,7 @@ Because it was originally built for FILTeR EXpressions.
 
 **What's Jison?**
 
-[Jison](http://zaach.github.io/jison/) is bundled with Filtrex - it's a JavaScript parser generator that does the underlying hard work of understanding the expression. It's based on Flex and Bison.
+[Jison](http://zaach.github.io/jison/) is bundled with Filtrex – it's a JavaScript parser generator that does the underlying hard work of understanding the expression. It's based on Flex and Bison.
 
 **License?**
 
@@ -155,12 +155,22 @@ Here: [Source](https://github.com/joewalnes/filtrex/blob/master/test/filtrex-tes
 
 Calling `compileExpression()` with a malformed expression will throw an exception. You can catch that and display feedback to the user. A good UI pattern is to attempt to compile on each keystroke and continuously indicate whether the expression is valid.
 
+
+Contributors
+------------
+
+* [@joewalnes](https://github.com/joewalnes) Joe Walnes – the author of this repository
+* [@msantos](https://github.com/msantos) Michael Santos – quoted symbols, regex matches and numerous fixes
+* [@alexgorbatchev](https://github.com/alexgorbatchev) Alex Gorbatchev – NPM package and housekeeping
+* [@m93a](https://github.com/m93a) Michal Grňo – critical fixes of security bug
+
+
 Like this? Want other thingies?
 -------------------------------
 
-*   [websocketd](https://github.com/joewalnes/websocketd) - Turn any program that uses STDIN/STDOUT into a WebSocket server. Like inetd, but for WebSockets.
-*   [ReconnectingWebSocket](https://github.com/joewalnes/reconnecting-websocket) - Simplest way to add some robustness to your WebSocket connections.
-*   [Smoothie Charts](http://smoothiecharts.org/) - JavaScript charts for streaming data.
+*   [websocketd](https://github.com/joewalnes/websocketd) – Turn any program that uses STDIN/STDOUT into a WebSocket server. Like inetd, but for WebSockets.
+*   [ReconnectingWebSocket](https://github.com/joewalnes/reconnecting-websocket) – Simplest way to add some robustness to your WebSocket connections.
+*   [Smoothie Charts](http://smoothiecharts.org/) – JavaScript charts for streaming data.
 *   Visit [The Igloo Lab](http://theigloolab.com/) to see and subscribe to other thingies I make.
 
 And **[follow @joewalnes](https://twitter.com/joewalnes)**!
