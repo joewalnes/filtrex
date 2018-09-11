@@ -20,7 +20,7 @@
  * `'foo-bar'`.  
  * You can use the following operators:
  *  * `x + y` Add
- *  * `x - y` Aubtract
+ *  * `x - y` Subtract
  *  * `x * y` Multiply
  *  * `x / y` Divide
  *  * `x % y` Modulo
