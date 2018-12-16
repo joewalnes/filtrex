@@ -12,9 +12,9 @@ Why?
 
 There are many cases where you want a user to be able enter an arbitrary expression through a user interface. e.g.
 
-*   Plot a chart ([example](http://rawgit.com/joewalnes/filtrex/master/example/plot.html))
-*   Filter/searching across items using multiple fields ([example](http://rawgit.com/joewalnes/filtrex/master/example/highlight.html))
-*   Colorize items based on values ([example](http://rawgit.com/joewalnes/filtrex/master/example/colorize.html))
+*   Plot a chart ([example](http://combinatronics.com/joewalnes/filtrex/master/example/plot.html))
+*   Filter/searching across items using multiple fields ([example](http://combinatronics.com/joewalnes/filtrex/master/example/highlight.html))
+*   Colorize items based on values ([example](http://combinatronics.com/joewalnes/filtrex/master/example/colorize.html))
 *   Implement a browser based spreadsheet
 
 Sure, you could do that with JavaScript and `eval()`, but I'm sure I don't have to tell you how stupid that would be.
@@ -33,7 +33,7 @@ Features
 Get it
 ------
 
-*    **DOWNLOAD [filtrex.js](https://rawgit.com/joewalnes/filtrex/master/filtrex.js)**
+*    **DOWNLOAD [filtrex.js](https://combinatronics.com/joewalnes/filtrex/master/filtrex.js)**
 
 10 second tutorial
 ------------------
@@ -149,7 +149,7 @@ Because it was originally built for FILTeR EXpressions.
 
 **Unit tests?**
 
-Here: [Source](https://github.com/joewalnes/filtrex/blob/master/test/filtrex-test.html), [Results](https://rawgit.com/joewalnes/filtrex/master/test/filtrex-test.html)
+Here: [Source](https://github.com/joewalnes/filtrex/blob/master/test/filtrex-test.html), [Results](https://combinatronics.com/joewalnes/filtrex/master/test/filtrex-test.html)
 
 **What happens if the expression is malformed?**
 
