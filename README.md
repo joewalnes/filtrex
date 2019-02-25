@@ -46,8 +46,8 @@ var expression = 'transactions <= 5 and abs(profit) > 20.5';
 var myfilter = compileExpression(expression);
 
 // Execute function
-myfilter({transactions: 3, profit:-40.5}); // returns 1
-myfilter({transactions: 3, profit:-14.5}); // returns 0
+await myfilter({transactions: 3, profit:-40.5}); // returns 1
+await myfilter({transactions: 3, profit:-14.5}); // returns 0
 ```
 
 Under the hood, the above expression gets compiled to a clean and fast JavaScript function, looking something like this:
@@ -128,8 +128,8 @@ var myfilter = compileExpression(
                     'strlen(firstname) > 5',
                     {strlen:strlen}); // custom functions
 
-myfilter({firstname:'Joe'});    // returns 0
-myfilter({firstname:'Joseph'}); // returns 1
+await myfilter({firstname:'Joe'});    // returns 0
+await myfilter({firstname:'Joseph'}); // returns 1
 ```
 
 FAQ
