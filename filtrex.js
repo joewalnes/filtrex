@@ -8,7 +8,7 @@
  *
  * -Joe Walnes
  */
-function compileExpression(expression, extraFunctions /* optional */) {
+function compileExpression(expression, extraFunctions /* optional */, propMapFcn) {
     var functions = {
         abs: Math.abs,
         ceil: Math.ceil,
@@ -50,8 +50,14 @@ function compileExpression(expression, extraFunctions /* optional */) {
         throw 'Unknown function: ' + funcName + '()';
     }
 
-    function prop(obj, name) {
+    function propDefault(obj, name) {
         return Object.prototype.hasOwnProperty.call(obj||{}, name) ? obj[name] : undefined;
+    }
+
+    function prop(obj, name) {
+      if (propMapFcn)
+        return propMapFcn(obj, name, propDefault);
+      return propDefault(obj, name);
     }
 
     var func = new Function('functions', 'data', 'unknown', 'prop', js.join(''));
