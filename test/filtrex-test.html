@@ -173,8 +173,13 @@ tests({
     },
 
     'backslash escaping': function() {
-        eq('\\good', compileExpression(`"\\" + '\\'`)({'\\':'good'}));
+        eq('\\good', compileExpression(`"\\\\" + '\\'`)({'\\':'good'}));
+        eq('\\good', compileExpression(`"\\\\" + '\\\\'`)({'\\\\':'good'}));
     },
+
+    'double quotes inside strings': function() {
+        eq('"test"', compileExpression('"\\"test\\""')({}));
+    }
 
 });
 
