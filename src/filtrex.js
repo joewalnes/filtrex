@@ -122,12 +122,7 @@ function filtrexParser() {
                   return "SYMBOL";`
                 ], // 'some-symbol'
 
-                ['"(?:[^"])*"',
-                 `yytext = JSON.stringify(
-                     yytext.substr(1, yyleng-2)
-                  );
-                  return "STRING";`
-                ], // "foo"
+                ['"(?:\\\\"|[^"])*"', 'return "STRING";'], // "foo"
 
                 // End
                 ['$', 'return "EOF";'],
