@@ -177,6 +177,10 @@ tests({
         eq('\\good', compileExpression(`"\\\\" + '\\\\'`)({'\\\\':'good'}));
     },
 
+    'double quotes inside strings': function() {
+        eq('"test"', compileExpression('"\\"test\\""')({}));
+    }
+
 });
 
 </script>
