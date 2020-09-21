@@ -33,7 +33,7 @@ Features
 Get it
 ------
 
-*    **DOWNLOAD [filtrex.js](https://rawgit.com/joewalnes/filtrex/master/filtrex.js)**
+*    **DOWNLOAD [filtrex.js](https://raw.githubusercontent.com/joewalnes/filtrex/master/filtrex.js)**
 
 10 second tutorial
 ------------------
