@@ -129,6 +129,7 @@ tests({
 
     'symbols with dots': function() {
         eq(123, compileExpression('hello.world.foo')({'hello.world.foo': 123}));
+        eq(123, compileExpression('hello.world.foo')({hello: { world: { foo: 123}}}));
         eq(123, compileExpression('order.gooandstuff')({'order.gooandstuff': 123}));
     },
 
@@ -163,6 +164,10 @@ tests({
         eq(42, compileExpression('a["b"]["c"]')(Object.create({a: { b: { c: 42 } }})));
         eq(42, compileExpression('a.b[0]')(Object.create({a: { b: [42]}})));
         eq(42, compileExpression('a.b[0].c')(Object.create({a: { b: [{ c: 42 }]}})));
+        eq(52, compileExpression('a.b[0].c + 10')(Object.create({a: { b: [{ c: 42 }]}})));
+        eq(true, compileExpression('a.b[0].c == 42')(Object.create({a: { b: [{ c: 42 }]}})));
+        eq(84, compileExpression('a.b[0].c + a["b"][0]["c"]')(Object.create({a: { b: [{ c: 42 }]}})));
+        eq(3, compileExpression('sqrt(a.b[0].c)')(Object.create({a: { b: [{ c: 9 }]}})));
     },
 
     'cannot inject single-quoted names with double quotes': function() {
