@@ -155,7 +155,14 @@ tests({
     },
 
     'cannot access properties of the data prototype': function() {
-        eq(undefined, compileExpression('a')(Object.create({a: 42})));
+        eq(42, compileExpression('a')(Object.create({a: 42})));
+        eq(42, compileExpression('a.b')(Object.create({a: { b: 42}})));
+        eq(42, compileExpression('a["b"]')(Object.create({a: { b: 42 }})));
+        eq(42, compileExpression("a['b']")(Object.create({a: { b: 42 }})));
+        eq(42, compileExpression('a["b"].c')(Object.create({a: { b: { c: 42 } }})));
+        eq(42, compileExpression('a["b"]["c"]')(Object.create({a: { b: { c: 42 } }})));
+        eq(42, compileExpression('a.b[0]')(Object.create({a: { b: [42]}})));
+        eq(42, compileExpression('a.b[0].c')(Object.create({a: { b: [{ c: 42 }]}})));
     },
 
     'cannot inject single-quoted names with double quotes': function() {

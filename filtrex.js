@@ -50,8 +50,28 @@ function compileExpression(expression, extraFunctions /* optional */) {
         throw 'Unknown function: ' + funcName + '()';
     }
 
-    function prop(obj, name) {
-        return Object.prototype.hasOwnProperty.call(obj||{}, name) ? obj[name] : undefined;
+    function prop(root, path) {
+        try {
+            if (path in root) return root[path];
+            if (Array.isArray(path)) path = "['" + path.join("']['") + "']";
+            var obj = root;
+            path.replace(
+              /\[\s*(['"])(.*?)\1\s*\]|^\s*(\w+)\s*(?=\.|\[|$)|\.\s*(\w*)\s*(?=\.|\[|$)|\[\s*(-?\d+)\s*\]/g,
+              function(
+                wholeMatch,
+                quotationMark,
+                quotedProp,
+                firstLevel,
+                namedProp,
+                index
+              ) {
+                obj = obj[quotedProp || firstLevel || namedProp || index];
+              }
+            );
+            return obj;
+          } catch (err) {
+            return undefined;
+          }
     }
 
     var func = new Function('functions', 'data', 'unknown', 'prop', js.join(''));
@@ -110,7 +130,8 @@ function filtrexParser() {
                 ['\\s+',  ''], // skip whitespace
                 ['[0-9]+(?:\\.[0-9]+)?\\b', 'return "NUMBER";'], // 212.321
 
-                ['[a-zA-Z][\\.a-zA-Z0-9_]*',
+                [
+                '(\\w+(\\[(([0-9]+)|([\'\"`]\\w+[\'\"`]))\\])*)(\\.\\w+(\\[(([0-9]+)|([\'\"`]\\w+[\'\"`]))\\])*)*',
                  `yytext = JSON.stringify(yytext);
                   return "SYMBOL";`
                 ], // some.Symbol22

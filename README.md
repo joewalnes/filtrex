@@ -163,6 +163,7 @@ Contributors
 * [@msantos](https://github.com/msantos) Michael Santos – quoted symbols, regex matches and numerous fixes
 * [@alexgorbatchev](https://github.com/alexgorbatchev) Alex Gorbatchev – NPM package and housekeeping
 * [@m93a](https://github.com/m93a) Michal Grňo – critical fixes of security bug
+* [@ansont](https://github.com/ansont) Anson Tsao - added nested property accessor
 
 
 Like this? Want other thingies?
@@ -175,3 +176,6 @@ Like this? Want other thingies?
 
 And **[follow @joewalnes](https://twitter.com/joewalnes)**!
 
+Additional Attributions
+-----------------------
+* [@nickgard](https://github.com/NickGard/tiny-get) portion of tiny-get used to get nested properties
